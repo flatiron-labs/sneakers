@@ -20,7 +20,7 @@ module Sneakers
 
   class RunnerConfig
     def method_missing(meth, *args, &block)
-      if %w{ before_fork after_fork }.include? meth.to_s
+      if %w{ before_fork after_fork after_run }.include? meth.to_s
         @conf[meth] = block
       elsif %w{ workers start_worker_delay amqp }.include? meth.to_s
         @conf[meth] = args.first
@@ -54,7 +54,7 @@ module Sneakers
 
       config = make_serverengine_config
 
-      [:before_fork, :after_fork].each do | hook |
+      [:before_fork, :after_fork, :after_run].each do | hook |
         Sneakers::CONFIG[:hooks][hook] = config.delete(hook) if config[hook]
       end
 

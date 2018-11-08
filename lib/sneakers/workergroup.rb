@@ -16,6 +16,11 @@ module Sneakers
       fafter.call if fafter
     end
 
+    def after_run
+      fafter = Sneakers::CONFIG[:hooks][:after_run]
+      fafter.call if fafter
+    end
+
     def run
       after_fork
 
@@ -43,6 +48,9 @@ module Sneakers
       end
       # end per worker
       #
+
+      after_run
+
       until @stop_flag.wait_for_set(Sneakers::CONFIG[:amqp_heartbeat])
         Sneakers.logger.debug("Heartbeat: running threads [#{Thread.list.count}]")
         # report aggregated stats?
