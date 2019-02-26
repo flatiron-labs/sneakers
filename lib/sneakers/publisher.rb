@@ -15,7 +15,16 @@ module Sneakers
       ensure_connection!
       to_queue = options.delete(:to_queue)
       options[:routing_key] ||= to_queue
-      Sneakers.logger.info {"publishing <#{msg}> to [#{options[:routing_key]}]"}
+      begin
+        # exceptions rescued here because msg is not guaranteed to be JSON
+        Sneakers.logger.info {{
+          message: "publishing <#{msg}> to [#{options[:routing_key]}]",
+          options: options,
+          msg: JSON.parse(msg)
+        }}
+      rescue
+        Sneakers.logger.info {"publishing <#{msg}> to [#{options[:routing_key]}]"}
+      end
       @exchange.publish(ContentType.serialize(msg, options[:content_type]), options)
     end
 
