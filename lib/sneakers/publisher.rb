@@ -1,3 +1,5 @@
+require 'oj'
+
 module Sneakers
   class Publisher
 
@@ -20,7 +22,7 @@ module Sneakers
         Sneakers.logger.info {{
           message: "publishing <#{msg}> to [#{options[:routing_key]}]",
           options: options,
-          msg: JSON.parse(msg)
+          msg: Oj.load(msg)
         }}
       rescue
         Sneakers.logger.info {"publishing <#{msg}> to [#{options[:routing_key]}]"}
