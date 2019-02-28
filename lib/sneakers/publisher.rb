@@ -1,5 +1,3 @@
-require 'oj'
-
 module Sneakers
   class Publisher
 

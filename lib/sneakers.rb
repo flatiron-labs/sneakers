@@ -3,6 +3,7 @@ require 'concurrent/executors'
 require 'bunny'
 require 'logger'
 require 'serverengine'
+require 'oj'
 
 module Sneakers
   module Handlers
@@ -108,4 +109,3 @@ module Sneakers
     @publisher = Sneakers::Publisher.new
   end
 end
-
