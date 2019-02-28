@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'bunny', '~> 2.2.0'
   gem.add_dependency 'thread', '~> 0.1.7'
   gem.add_dependency 'thor'
+  gem.add_dependency 'oj', '3.6.0'
 
   # for integration environment (see .travis.yml and integration_spec)
   gem.add_development_dependency 'rabbitmq_http_api_client'
@@ -37,4 +38,3 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'minitest'
   gem.add_development_dependency 'guard'
 end
-

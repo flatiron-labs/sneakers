@@ -11,7 +11,16 @@ module Sneakers
       end
       to_queue = options.delete(:to_queue)
       options[:routing_key] ||= to_queue
-      Sneakers.logger.info {"publishing <#{msg}> to [#{options[:routing_key]}]"}
+      begin
+        # exceptions rescued here because msg is not guaranteed to be JSON
+        Sneakers.logger.info {{
+          message: "publishing <#{msg}> to [#{options[:routing_key]}]",
+          options: options,
+          msg: Oj.load(msg)
+        }}
+      rescue
+        Sneakers.logger.info {"publishing <#{msg}> to [#{options[:routing_key]}]"}
+      end
       @exchange.publish(msg, options)
     end
 
@@ -38,4 +47,3 @@ module Sneakers
     end
   end
 end
-
