@@ -21,6 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'bunny', '~> 2.2.0'
   gem.add_dependency 'thread', '~> 0.1.7'
   gem.add_dependency 'thor'
+  gem.add_dependency 'amq-protocol', '2.2.0'
   gem.add_dependency 'oj', '3.6.0'
 
   # for integration environment (see .travis.yml and integration_spec)
