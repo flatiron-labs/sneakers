@@ -19,7 +19,7 @@ module Sneakers
         end
       end
       ["TERM", "USR1", "HUP", "USR2"].each do |signal|
-        Signal.trap(signal){ @pids.each{|pid| Process.kill(signal, pid) } }
+        Signal.trap(signal){ @pids.each{|pid| `kill -9 #{pid}` } }
       end
       Process.waitall
     end
